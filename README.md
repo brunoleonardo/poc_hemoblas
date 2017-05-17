@@ -25,13 +25,16 @@ Projetos criados com o Apache Maven, bastando assim importá-lo em sua IDE e con
 
 # Configuração do Banco de Dados
 
+
 Crie dois esquemas no MySQL chamados **agendamento** e **administrativo** e altere as credenciais de acesso ao banco de dados nos arquivos **application.yml** dos projetos "hemoblasApiGateway", "agendamentoService" e "administrativoService". 
 
-* **Obs.:** As aplicações estão configuradas para geração/atualização automática das tabelas baseado no mapeamento das entidades.
+Em seguida execute o Script **Dump20170516.sql** para criação da estrutura de tabelas e carga de dados básicos.
 
 # Acesso
 
 Execute o projeto e acesse [https://localhost:8080/hemoblas](https://localhost:8080/hemoblas). Você será redirecionado para a tela de login:
 
 ![login](https://github.com/brunoleonardo/poc_hemoblas/blob/master/login.png)
+
+Para criar um usuário, basta clicar no link **Registrar** onde será redirecionada para o cadastro de doador.
 
