@@ -1,0 +1,20 @@
+#############################################################
+# ARQUIVOS E PASTAS A SEREM IGNORADOS PELO GIT
+#############################################################
+
+/target
+
+/.mvn
+
+/.settings
+
+mvnw
+
+mvnw.cmd
+
+.classpath
+
+.project
+
+.project
+

@@ -1,0 +1,270 @@
+<div class="container">
+	<div class="page-header">
+		<h3>{{app}}</h3>
+	</div>
+
+	<!-- MENSAGENS --> 
+	<!-- Sucesso -->
+	<div ng-show="sucesso">
+	     <div class="alert alert-success">
+	     	<strong>Cadastro realizado com sucesso!</strong>
+	    </div>
+	</div>
+	
+	<!-- Erro --> 
+	<div ng-repeat="error in errors" ng-show="errors">
+	     <div class="alert alert-danger">
+	     	{{error}}
+	    </div>
+	</div>
+	
+	<!-- Validação -->
+	<div ng-show="doadorForm.nome.$touched" ng-messages="doadorForm.nome.$error">
+        <div ng-message="required" class="alert alert-danger">
+            Por favor, preencha o campo Nome.
+        </div>
+        <div ng-message="minlength || maxlength" class="alert alert-danger">
+            O campo Nome deve ter no mínimo 6 e no máximo 60 caracteres.
+        </div>
+    </div>
+    
+    <div ng-show="!doador.dataNascimento && doadorForm.dataNascimento.$dirty || doadorForm.dataNascimento.$pristine && doadorForm.dataNascimento.$touched">
+        <div class="alert alert-danger">
+            Por favor, preencha o campo Data de Nascimento.
+        </div>
+    </div>
+    
+    <div ng-show="!doador.genero && doadorForm.genero.$dirty || doadorForm.genero.$pristine && doadorForm.genero.$touched">
+        <div class="alert alert-danger">
+            Por favor, selecione o Sexo.
+        </div>        
+    </div>
+    
+    <div ng-show="doadorForm.cpf.$touched" ng-messages="doadorForm.cpf.$error">
+        <div ng-message="required" class="alert alert-danger">
+            Por favor, preencha o campo CPF.
+        </div>
+        <div ng-message="minlength || maxlength" class="alert alert-danger">
+            O campo CPF deve ter 14 caracteres.
+        </div>
+    </div>
+    
+    <div ng-show="doadorForm.rg.$touched" ng-messages="doadorForm.rg.$error">
+        <div ng-message="required" class="alert alert-danger">
+            Por favor, preencha o campo RG.
+        </div>
+        <div ng-message="minlength || maxlength" class="alert alert-danger">
+            O campo RG deve ter no mínimo 7 e no máximo 15 caracteres.
+        </div>
+    </div>
+    
+    <div ng-show="doadorForm.telefone.$touched" ng-messages="doadorForm.telefone.$error">
+        <div ng-message="required" class="alert alert-danger">
+            Por favor, preencha o campo Telefone.
+        </div>
+        <div ng-message="minlength || maxlength" class="alert alert-danger">
+            O campo Telefone deve ter no mínimo 14 e no máximo 15 caracteres.  
+        </div>
+    </div>
+    
+    <div ng-show="doadorForm.email.$touched" ng-messages="doadorForm.email.$error">
+        <div ng-message="required" class="alert alert-danger">
+            Por favor, preencha o campo E-mail.
+        </div>
+    </div>
+    
+    <div ng-show="doadorForm.endereco.$touched" ng-messages="doadorForm.endereco.$error">
+        <div ng-message="required" class="alert alert-danger">
+            Por favor, preencha o campo Endereço!
+        </div>
+        <div ng-message="minlength || maxlength" class="alert alert-danger">
+            O campo Endereço deve ter no mínimo 16 e no máximo 100 caracteres.  
+        </div>
+    </div>
+    
+    <div ng-show="doadorForm.complemento.$touched" ng-messages="doadorForm.complemento.$error">
+        <div ng-message="maxlength" class="alert alert-danger">
+            O campo Complemento deve ter no máximo 45 caracteres.  
+        </div>
+    </div>
+    
+    <div ng-show="doadorForm.cep.$touched" ng-messages="doadorForm.cep.$error">
+        <div ng-message="required" class="alert alert-danger">
+            Por favor, preencha o campo CEP.
+        </div>
+        <div ng-message="minlength || maxlength" class="alert alert-danger">
+            O campo CEP deve ter 10 caracteres. 
+        </div>
+    </div>    
+    
+    <div ng-show="doadorForm.senha.$touched" ng-messages="doadorForm.senha.$error">
+        <div ng-message="required" class="alert alert-danger">
+            Por favor, preencha o campo Senha.
+        </div>
+        <div ng-message="minlength || maxlength" class="alert alert-danger">
+            O campo Senha deve ter no mínimo 6 e no máximo 12 caracteres.  
+        </div>
+    </div> 
+    
+    <div ng-show="doadorForm.confirmaSenha.$touched" ng-messages="doadorForm.confirmaSenha.$error">
+        <div ng-message="required" class="alert alert-danger">
+            Por favor, preencha o campo Confirma Senha.
+        </div>
+        <div ng-message="minlength || maxlength" class="alert alert-danger">
+            O campo Confirma Senha deve ter no mínimo 6 e no máximo 12 caracteres.  
+        </div>
+    </div> 
+
+	<!-- FORMULÁRIO -->
+	<form name="doadorForm">
+		<div class="row">	
+			<div class="col-sm-8">
+				<div class="form-group" ng-class="{'has-error': doadorForm.nome.$invalid && doadorForm.nome.$touched}">
+					<label class="control-label">Nome</label> 
+					<input class="form-control" type="text" 
+						name="nome" placeholder="Nome Completo" 
+						ng-model="doador.nome" ng-required="true" ng-minlength="6" ng-maxlength="60"  />
+				</div>				
+			</div>
+			
+			<div class="col-sm-3">
+				<div class="form-group" ng-class="{'has-error': doadorForm.genero.$pristine && doadorForm.genero.$touched}">
+					<label class="control-label">Sexo</label> 
+					<select name="genero"
+						class="form-control" ng-model="doador.genero"
+						ng-options="genero.descricao for genero in generos"	ng-required="true">
+						<option value="">-- Selecione o Sexo --</option>
+					</select>
+				</div>
+			</div>		
+		</div>
+
+		<div class="row">					
+			<div class="col-sm-2">
+				<div class="form-group">
+					<label class="control-label">Data de Nascimento</label> 
+					<input class="form-control"	type="text" 
+						id="dataNascimento" name="dataNascimento" placeholder="Data de Nascimento" 
+						ng-model="doador.dataNascimento" ng-required="true" ui-date-directive />
+				</div>				
+			</div>		
+			
+			<div class="col-sm-2">
+				<div class="form-group" ng-class="{'has-error': doadorForm.cpf.$invalid && doadorForm.cpf.$touched}">
+					<label class="control-label">CPF</label> 
+					<input class="form-control" type="text" 
+						id="cpf" name="cpf" placeholder="CPF" 
+						ng-model="doador.cpf" ng-required="true" ng-minlength="14" ng-maxlength="14" />
+				</div>				
+			</div>		
+			
+			<div class="col-sm-2">
+				<div class="form-group" ng-class="{'has-error': doadorForm.rg.$invalid && doadorForm.rg.$touched}">
+					<label class="control-label">RG: *</label> 
+					<input class="form-control" type="text" 
+						id="rg" name="rg" placeholder="RG" 
+						ng-model="doador.rg"	ng-required="true" ng-minlength="10" ng-maxlength="12" />
+				</div>				
+			</div>	
+			
+			<div class="col-sm-2">
+				<div class="form-group" ng-class="{'has-error': doadorForm.telefone.$invalid && doadorForm.telefone.$touched}">
+					<label class="control-label">Telefone</label> 
+					<input class="form-control" type="text" 
+						id="telefone" name="telefone" placeholder="Telefone" 
+						ng-model="doador.telefone" ng-required="true" ng-minlength="14" ng-maxlength="15" />
+				</div>				
+			</div>
+			
+			<div class="col-sm-4">
+				<div class="form-group" ng-class="{'has-error': doadorForm.email.$invalid && doadorForm.email.$touched}">
+					<label class="control-label">E-mail</label> 
+					<input class="form-control" type="email" 
+						name="email" placeholder="E-mail" 
+						ng-model="doador.email" ng-required="true" />
+				</div>				
+			</div>
+		</div>
+				
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group" ng-class="{'has-error': doadorForm.endereco.$invalid && doadorForm.endereco.$touched}">
+					<label class="control-label">Endereço</label> 
+					<input class="form-control" type="text" 
+						name="endereco" placeholder="Endereço" 
+						ng-model="doador.endereco" ng-required="true" ng-minlength="16" ng-maxlength="100"  />
+				</div>				
+			</div>
+			
+			<div class="col-sm-4">
+				<div class="form-group" ng-class="{'has-error': doadorForm.complemento.$invalid && doadorForm.complemento.$touched}">
+					<label class="control-label">Complemento</label> 
+					<input class="form-control" type="text" 
+						name="complemento" placeholder="Complemento"
+						ng-model="doador.complemnento" ng-maxlength="45" />
+				</div>				
+			</div>
+			
+			<div class="col-sm-2">
+				<div class="form-group" ng-class="{'has-error': doadorForm.cep.$invalid && doadorForm.cep.$touched}">
+					<label class="control-label">CEP</label> 
+					<input class="form-control" type="text" 
+						id="cep" name="cep" placeholder="CEP" 
+						ng-model="doador.cep" ng-required="true" ng-minlength="10" ng-maxlength="10" />
+				</div>				
+			</div>	
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-2">
+				<div class="form-group" ng-class="{'has-error': doadorForm.senha.$invalid && doadorForm.senha.$touched}">
+					<label class="control-label">Criar um Senha</label> 
+					<input class="form-control" type="password" 
+						id="senha" name="senha" placeholder="Senha" 
+						ng-model="doador.senha" ng-required="true" ng-minlength="6" ng-maxlength="12" />
+				</div>
+			</div>
+			
+			<div class="col-sm-2">
+				<div class="form-group" ng-class="{'has-error': doadorForm.confirmaSenha.$invalid && doadorForm.confirmaSenha.$touched}">
+					<label class="control-label">Confirme sua Senha</label> 
+					<input class="form-control" type="password" 
+						id="confirmaSenha" name="confirmaSenha" placeholder="Confirme sua Senha" 
+						ng-model="doador.confirmaSenha" ng-required="true" ng-minlength="6" ng-maxlength="12" />
+				</div>
+			</div>
+		</div>
+		
+		<hr>
+		
+		<button class="btn btn-primary" ng-click="cadastrarDoador(doador)" ng-disabled="doadorForm.$invalid">
+        	Salvar
+    	</button>
+	</form>
+</div>
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		/*$('#dataNascimento').mask("99/99/9999", {
+			placeholder : " "	
+		});*/
+		
+		$('#cpf').mask('999.999.999-99');
+		
+		$("#rg").mask("99.999.999?9").on("focusout", function () {
+            var len = this.value.replace(/\D/g, '').length;
+            $(this).mask(len > 9 ? "99.999.999" : "99.999.999?9");
+        });
+				       
+        $("#telefone").mask("(99) 9999-9999?9").on("focusout", function () {
+            var len = this.value.replace(/\D/g, '').length;
+            $(this).mask(len > 10 ? "(99) 99999-999?9" : "(99) 9999-9999?9");
+        });
+		
+		$("#cep").mask("99.999-999", {
+			placeholder : " "
+		});		
+	});
+</script>
+

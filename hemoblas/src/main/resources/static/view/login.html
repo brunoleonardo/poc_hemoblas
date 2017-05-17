@@ -1,0 +1,67 @@
+<div class="col-md-6 col-md-offset-3">
+    
+    <h2>Dados de Acesso</h2>
+    
+    <br />
+    
+    <!-- MENSAGENS --> 
+    <div ng-show="autenticacaoInvalida">
+	     <div class="alert alert-danger">
+	     	<strong>CPF ou Senha incorretos. Tente novamente.</strong>
+	    </div>
+	</div>
+    
+    <div ng-show="loginForm.cpf.$touched" ng-messages="loginForm.cpf.$error">
+        <div ng-message="required" class="alert alert-danger">
+            Por favor, preencha o campo CPF.
+        </div>
+        <div ng-message="minlength || maxlength" class="alert alert-danger">
+            O campo CPF deve ter 14 caracteres.
+        </div>
+    </div>
+    
+     <div ng-show="loginForm.senha.$touched" ng-messages="loginForm.senha.$error">
+        <div ng-message="required" class="alert alert-danger">
+            Por favor, preencha o campo Senha.
+        </div>
+        <div ng-message="minlength || maxlength" class="alert alert-danger">
+            O campo Senha deve ter no mínimo 6 e no máximo 12 caracteres.  
+        </div>
+    </div> 
+    
+    
+    <!-- FORMULÁRIO -->
+    <form name="loginForm">
+        
+        <div class="form-group" ng-class="{'has-error': loginForm.cpf.$invalid && loginForm.cpf.$touched}">
+			<label class="control-label">CPF</label> 
+			<input class="form-control" type="text" 
+				id="cpf" name="cpf" placeholder="CPF" 
+				ng-model="dadosLogin.cpf" ng-required="true" ng-minlength="14" ng-maxlength="14" />
+		</div>	
+          
+		<div class="form-group" ng-class="{'has-error': loginForm.senha.$invalid && loginForm.senha.$touched}">
+			<label class="control-label">Senha</label> 
+			<input class="form-control" type="password" 
+				id="senha" name="senha" placeholder="Senha" 
+				ng-model="dadosLogin.senha" ng-required="true" ng-minlength="6" ng-maxlength="12" />
+		</div>
+	        
+        <div class="form-actions">            
+            <button class="btn btn-primary" ng-click="login(dadosLogin)" ng-disabled="loginForm.$invalid">
+	        	Fazer login
+	    	</button>            
+           
+            <a href="#cadastroDoador" class="btn btn-link">Registrar</a>
+        </div>
+        
+    </form>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		$('#cpf').mask('999.999.999-99');		
+		
+	});
+</script>

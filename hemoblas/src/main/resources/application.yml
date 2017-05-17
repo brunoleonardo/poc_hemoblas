@@ -1,0 +1,15 @@
+# ========================================================================================================================================
+# CONFIGURAÇÕES DO SPRING BOOT
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# http://cloud.spring.io/spring-cloud-netflix/spring-cloud-netflix.html
+# ========================================================================================================================================
+
+server:
+  contextPath: /hemoblas
+  port: 8080
+  ssl:
+    key-store: /home/bruno/Desktop/TCC/Projects/keystore.p12
+    key-store-password: hemobl@s
+    key-store-type: PKCS12
+    key-alias: tomcat
+

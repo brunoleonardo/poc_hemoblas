@@ -1,0 +1,131 @@
+<div class="container">
+	<div class="page-header">
+		<h3>{{app}}</h3> 
+	</div>
+
+	<!-- MENSAGENS --> 
+	<!-- Sucesso -->
+	<div ng-show="numeroProtocolo">
+	     <div class="alert alert-success">
+	     	<strong>Doação agendada com sucesso!</strong> Anote o Número do Protocolo: {{numeroProtocolo}}
+	    </div>
+	</div>
+	
+	<!-- Erro -->
+	<div ng-repeat="error in errors" ng-show="errors">
+	     <div class="alert alert-danger">
+	     	{{error}}
+	    </div>
+	</div>
+	
+	<!-- Validação -->
+	<div ng-show="!estadoSelecionado || doacaoForm.estado.$pristine && doacaoForm.estado.$touched">
+        <div class="alert alert-danger">
+            Por favor, selecione o Estado.
+        </div>        
+    </div>
+    
+    <div ng-show="!municipioSelecionado || doacaoForm.municipio.$pristine && doacaoForm.municipio.$touched">
+        <div class="alert alert-danger">
+            Por favor, selecione o Município.
+        </div>        
+    </div>
+    
+    <div ng-show="!hemocentroSelecionado && doacaoForm.hemocentro.$dirty || doacaoForm.hemocentro.$pristine && doacaoForm.hemocentro.$touched">
+        <div class="alert alert-danger">
+            Por favor, selecione o Hemocentro.
+        </div>        
+    </div>
+
+	<div ng-show="!agenda.id && doacaoForm.dataHora.$dirty || doacaoForm.dataHora.$pristine && doacaoForm.dataHora.$touched">
+        <div class="alert alert-danger">
+            Por favor, selecione a Data e Horário.
+        </div>        
+    </div>
+	
+	<!-- FORMULÁRIO -->
+	<form name="doacaoForm">
+		  <div class="row">
+			<div class="col-sm-3">      
+				<div class="form-group" ng-class="{'has-error': doacaoForm.estado.$pristine && doacaoForm.estado.$touched}">
+					<label class="control-label">Estado</label> 
+					<select name="estado"
+						class="form-control" ng-model="estadoSelecionado"
+						ng-options="estado.nome for estado in estados | orderBy: 'nome'"
+						ng-change="getMunicipiosPorEstado()" ng-required="true">
+						<option value="">-- Selecione o Estado --</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="col-sm-3">
+				<div class="form-group" ng-class="{'has-error': doacaoForm.municipio.$pristine && doacaoForm.municipio.$touched}">
+					<label class="control-label">Município</label> 
+					<select name="municipio"
+						class="form-control" ng-model="municipioSelecionado"
+						ng-options="municipio.nome for municipio in municipios"
+						ng-change="getHemocentrosPorMunicipio()" ng-required="true">
+						<option value="">-- Selecione o Município --</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="col-sm-6">
+				<div class="form-group" ng-class="{'has-error': doacaoForm.hemocentro.$pristine && doacaoForm.hemocentro.$touched}">
+					<label class="control-label">Hemocentro</label> 
+					<select name="hemocentro"
+						class="form-control" ng-model="hemocentroSelecionado"
+						ng-options="hemocentro.nomeFantasia for hemocentro in estabelecimentosSaude"
+						ng-change="getAgendasPorHemocentro()" ng-required="true">
+						<option value="">-- Selecione o Hemocentro --</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-3">
+				<div class="form-group" ng-class="{'has-error': doacaoForm.dataHora.$pristine && doacaoForm.dataHora.$touched}">
+					<label class="control-label">Data e Horário</label> 
+					<select name="dataHora"
+						class="form-control" ng-model="agenda"
+						dateTime="yyyy-MM-dd"
+						ng-options="agenda.dataHora | date: 'dd/MM/yyyy HH:mm' for agenda in agendasHemocentro | orderBy: 'dataHora'"
+						ng-required="true">
+						<option value="">-- Selecione a Data e Horário --</option>
+					</select>
+				</div>
+			</div>		
+		</div>
+			
+		<hr>
+		
+		<button class="btn btn-primary" ng-click="agendarDoacao(agenda)" ng-disabled="doacaoForm.$invalid">
+        	Agendar
+    	</button>
+	</form>
+</div>
+
+<!-- JAVASCRIPT -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		/*$('#dataNascimento').mask("99/99/9999", {
+			placeholder : " "	
+		});*/
+		
+		$("#rg").mask("99.999.999?9").on("focusout", function () {
+            var len = this.value.replace(/\D/g, '').length;
+            $(this).mask(len > 9 ? "99.999.999" : "99.999.999?9");
+        });
+				       
+        $("#telefone").mask("(99) 9999-9999?9").on("focusout", function () {
+            var len = this.value.replace(/\D/g, '').length;
+            $(this).mask(len > 10 ? "(99) 99999-999?9" : "(99) 9999-9999?9");
+        });
+		
+		$("#cep").mask("99.999-999", {
+			placeholder : " "
+		});		
+	});
+</script>
+
