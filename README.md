@@ -36,5 +36,12 @@ Execute o projeto e acesse [https://localhost:8080/hemoblas](https://localhost:8
 
 ![login](https://github.com/brunoleonardo/poc_hemoblas/blob/master/login.png)
 
-Para criar um usuário, basta clicar no link **Registrar** onde será redirecionada para o cadastro de doador.
+Para criar um usuário, basta clicar no link **Registrar**. Você será redirecionado para a Tela para de Cadastro de Doador.
+
+![cadastroDoador](https://github.com/brunoleonardo/poc_hemoblas/blob/master/cadastroDoador.png)
+
+Após cadastrado, basta realizar login no sistema e agendar uma doação.
+
+![agendarDoacao](https://github.com/brunoleonardo/poc_hemoblas/blob/master/agendarDoacao.png)
+
 
