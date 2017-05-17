@@ -1,0 +1,4 @@
+insert into municipio (id, nome, uf, estado) 
+select cast(substring(codigo_ibge, 1, 6) as unsigned), nome, uf, estado from MUNICIPIO2;
+
+DROP TABLE MUNICIPIO2;
