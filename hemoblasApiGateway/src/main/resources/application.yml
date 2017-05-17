@@ -1,0 +1,58 @@
+# ========================================================================================================================================
+# CONFIGURAÇÕES DO SPRING BOOT
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# http://cloud.spring.io/spring-cloud-netflix/spring-cloud-netflix.html
+# ========================================================================================================================================
+
+server:
+  port: 9090
+  ssl:
+    key-store: /home/bruno/Desktop/TCC/Projects/keystore.p12
+    key-store-password: hemobl@s
+    key-store-type: PKCS12
+    key-alias: tomcat
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+
+zuul:
+  prefix: /api
+  routes:
+    administrativo:
+      path: /administrativoService/**
+      serviceId: ADMINISTRATIVO-SERVICE        
+    agendamento:
+      path: /agendamentoService/**
+      serviceId: AGENDAMENTO-SERVICE
+      
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false    
+
+jwt:
+  token: 
+    secret: hemobl@s
+  auth: 
+    header: Authorization
+  expire:
+    hours: 1
+        
+spring:
+  application:
+    name: HEMOBLAS-API-GATEWAY
+  datasource:
+    url: jdbc:mysql://localhost:3306/administrativo
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: none
+      
+      
+      
+      
