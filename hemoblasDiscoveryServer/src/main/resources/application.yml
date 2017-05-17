@@ -1,0 +1,16 @@
+# ========================================================================================================================================
+# CONFIGURAÇÕES DO SPRING BOOT
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# http://cloud.spring.io/spring-cloud-netflix/spring-cloud-netflix.html
+# ========================================================================================================================================
+
+server:
+  port: 8761
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: true
+  server:
+    enableSelfPreservation: false
+    
