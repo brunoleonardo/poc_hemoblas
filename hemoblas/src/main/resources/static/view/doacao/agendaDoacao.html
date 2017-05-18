@@ -50,7 +50,8 @@
 				<div class="form-group" ng-class="{'has-error': doacaoForm.estado.$pristine && doacaoForm.estado.$touched}">
 					<label class="control-label">Estado</label> 
 					<select name="estado"
-						class="form-control" ng-model="estadoSelecionado"
+						class="form-control" 
+						ng-model="estadoSelecionado"
 						ng-options="estado.nome for estado in estados | orderBy: 'nome'"
 						ng-change="getMunicipiosPorEstado()" ng-required="true">
 						<option value="">-- Selecione o Estado --</option>
@@ -62,9 +63,12 @@
 				<div class="form-group" ng-class="{'has-error': doacaoForm.municipio.$pristine && doacaoForm.municipio.$touched}">
 					<label class="control-label">Município</label> 
 					<select name="municipio"
-						class="form-control" ng-model="municipioSelecionado"
+						class="form-control" 
+						ng-model="municipioSelecionado"
 						ng-options="municipio.nome for municipio in municipios"
-						ng-change="getHemocentrosPorMunicipio()" ng-required="true">
+						ng-change="getHemocentrosPorMunicipio()" 
+						ng-disabled="estadoSelecionado.sigla == null"
+						ng-required="true">
 						<option value="">-- Selecione o Município --</option>
 					</select>
 				</div>
@@ -74,9 +78,12 @@
 				<div class="form-group" ng-class="{'has-error': doacaoForm.hemocentro.$pristine && doacaoForm.hemocentro.$touched}">
 					<label class="control-label">Hemocentro</label> 
 					<select name="hemocentro"
-						class="form-control" ng-model="hemocentroSelecionado"
+						class="form-control" 
+						ng-model="hemocentroSelecionado"
 						ng-options="hemocentro.nomeFantasia for hemocentro in estabelecimentosSaude"
-						ng-change="getAgendasPorHemocentro()" ng-required="true">
+						ng-change="getAgendasPorHemocentro()" 
+						ng-disabled="municipioSelecionado.id == null"
+						ng-required="true">
 						<option value="">-- Selecione o Hemocentro --</option>
 					</select>
 				</div>
@@ -88,9 +95,11 @@
 				<div class="form-group" ng-class="{'has-error': doacaoForm.dataHora.$pristine && doacaoForm.dataHora.$touched}">
 					<label class="control-label">Data e Horário</label> 
 					<select name="dataHora"
-						class="form-control" ng-model="agenda"
+						class="form-control" 
+						ng-model="agenda"
 						dateTime="yyyy-MM-dd"
 						ng-options="agenda.dataHora | date: 'dd/MM/yyyy HH:mm' for agenda in agendasHemocentro | orderBy: 'dataHora'"
+						ng-disabled="hemocentroSelecionado.id == null"
 						ng-required="true">
 						<option value="">-- Selecione a Data e Horário --</option>
 					</select>

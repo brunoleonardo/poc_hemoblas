@@ -16,7 +16,7 @@ angular.module("hemoblas").controller(
 				sigla : 'AM',
 				nome : 'Amazonas'
 			}, {
-				sigla : 'AP',
+				sigla : 'AP', 
 				nome : 'Amapá'
 			}, {
 				sigla : 'BA',
