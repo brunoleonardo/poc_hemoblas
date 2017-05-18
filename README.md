@@ -25,7 +25,7 @@ Projetos criados com o Apache Maven, bastando assim importá-lo em sua IDE e con
 
 # Configuração do Banco de Dados
 
-Execute os arquivos **administrativo.sql** e **agendamento.sql** (pasta **Scripts SQL**) para criação dos Bancos de Dados e carga inicial.
+Execute os arquivos **administrativo.sql** e **agendamento.sql** (pasta **Scripts SQL**) para criação dos Bancos de Dados e carga inicial de dados.
 
 Altere as credenciais de acesso ao Banco de Dados nos arquivos **application.yml** dos projetos "hemoblasApiGateway", "agendamentoService" e "administrativoService". 
 
