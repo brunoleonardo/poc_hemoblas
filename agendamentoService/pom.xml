@@ -6,7 +6,6 @@
 	<groupId>br.com.blas</groupId>
 	<artifactId>agendamentoService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
 
 	<name>agendamentoService</name>
 
@@ -56,6 +55,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>6.4.0</version>
+        </dependency>  
 	
 		<dependency>
 			<groupId>mysql</groupId>

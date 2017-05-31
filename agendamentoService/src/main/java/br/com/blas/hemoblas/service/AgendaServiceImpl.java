@@ -24,8 +24,7 @@ public class AgendaServiceImpl implements AgendaService {
 	public List<Agenda> listarAgendasPorHemocentroComStatus(Long estabelecimentoSaudeId, Integer statusId) {
 		StatusAgenda statusAgendaAberta = statusAgendaRepository.findByDescricaoIgnoreCase("Aberta");
 		if (statusAgendaAberta.getId() == statusId) {
-			return agendaRepository.findByEstabelecimentoSaudeAndStatusAndDataHoraMaiorQue(estabelecimentoSaudeId,
-					statusId, new Date());
+			return agendaRepository.findByEstabelecimentoSaudeAndStatusAndDataHoraMaiorQue(estabelecimentoSaudeId, statusId, new Date());
 		} else {
 			return agendaRepository.findByEstabelecimentoSaudeAndStatus(estabelecimentoSaudeId, statusId);
 		}
@@ -37,6 +36,11 @@ public class AgendaServiceImpl implements AgendaService {
 		agenda.setStatus(statusAgendaAlocada);
 
 		agendaRepository.save(agenda);
+	}
+
+	@Override
+	public Agenda buscarPorNumeroProtocolo(String numeroProtocolo) {
+		return agendaRepository.findByNumeroProtocolo(numeroProtocolo);
 	}
 
 }

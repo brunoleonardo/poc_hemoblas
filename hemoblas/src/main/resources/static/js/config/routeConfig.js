@@ -13,8 +13,7 @@ angular.module("hemoblas").config(function($routeProvider) {
 
 	$routeProvider.when("/cadastroDoador", {
 		templateUrl : "view/doador/cadastroDoador.html",
-		controller : "cadastroDoadorController",
-		authorize : true
+		controller : "cadastroDoadorController"
 	});
 
 	$routeProvider.when("/error", {

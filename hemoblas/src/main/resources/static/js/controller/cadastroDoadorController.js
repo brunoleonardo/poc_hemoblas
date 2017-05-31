@@ -13,7 +13,8 @@ angular.module("hemoblas").controller("cadastroDoadorController", function($scop
 
 	// CADASTRAR DOADOR
 	$scope.cadastrarDoador = function(doador) {
-
+		$scope.processando = true;
+		
 		doadorService.cadastrarDoador(doador).success(function(data) {
 
 			// CADASTRA UM USUÁRIO PARA O DOADOR
@@ -32,8 +33,11 @@ angular.module("hemoblas").controller("cadastroDoadorController", function($scop
 			$scope.doadorForm.$setUntouched();
 			$scope.doadorForm.$setPristine();
 
+			$scope.processando = false;			
 		}).error(function(data, status) {
 			$scope.errors = data.errors;
+			
+			$scope.processando = false;
 		});
 	};
 });

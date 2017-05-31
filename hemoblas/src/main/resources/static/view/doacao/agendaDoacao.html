@@ -1,3 +1,17 @@
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#/">Hemoblas</a>
+		</div>
+		
+		<ul class="nav navbar-nav navbar-right">	
+   			<li>
+   				<a ng-href="#/" ng-click="logout()"><span class="glyphicon glyphicon-log-out"></span> Sair</a>
+   			</li>
+   		</ul>      		
+	</div>
+</nav>
+
 <div class="container">
 	<div class="page-header">
 		<h3>{{app}}</h3> 
@@ -7,7 +21,7 @@
 	<!-- Sucesso -->
 	<div ng-show="numeroProtocolo">
 	     <div class="alert alert-success">
-	     	<strong>Doação agendada com sucesso!</strong> Anote o Número do Protocolo: {{numeroProtocolo}}
+	     	<strong>Doação agendada com sucesso!</strong> Anote o Número do Protocolo: {{numeroProtocolo}} e guarde o Comprovante de Agendamento gerado.
 	    </div>
 	</div>
 	
@@ -49,11 +63,12 @@
 			<div class="col-sm-3">      
 				<div class="form-group" ng-class="{'has-error': doacaoForm.estado.$pristine && doacaoForm.estado.$touched}">
 					<label class="control-label">Estado</label> 
-					<select name="estado"
+					<select name="estado"					
 						class="form-control" 
 						ng-model="estadoSelecionado"
 						ng-options="estado.nome for estado in estados | orderBy: 'nome'"
-						ng-change="getMunicipiosPorEstado()" ng-required="true">
+						ng-change="getMunicipiosPorEstado()" 
+						ng-required="true">
 						<option value="">-- Selecione o Estado --</option>
 					</select>
 				</div>
@@ -67,7 +82,7 @@
 						ng-model="municipioSelecionado"
 						ng-options="municipio.nome for municipio in municipios"
 						ng-change="getHemocentrosPorMunicipio()" 
-						ng-disabled="estadoSelecionado.sigla == null"
+						ng-disabled="estadoSelecionado.sigla == null || municipios.length == 0"
 						ng-required="true">
 						<option value="">-- Selecione o Município --</option>
 					</select>
@@ -82,7 +97,7 @@
 						ng-model="hemocentroSelecionado"
 						ng-options="hemocentro.nomeFantasia for hemocentro in estabelecimentosSaude"
 						ng-change="getAgendasPorHemocentro()" 
-						ng-disabled="municipioSelecionado.id == null"
+						ng-disabled="municipioSelecionado.id == null || estabelecimentosSaude.length == 0"
 						ng-required="true">
 						<option value="">-- Selecione o Hemocentro --</option>
 					</select>
@@ -99,7 +114,7 @@
 						ng-model="agenda"
 						dateTime="yyyy-MM-dd"
 						ng-options="agenda.dataHora | date: 'dd/MM/yyyy HH:mm' for agenda in agendasHemocentro | orderBy: 'dataHora'"
-						ng-disabled="hemocentroSelecionado.id == null"
+						ng-disabled="hemocentroSelecionado.id == null || agendasHemocentro.length == 0"
 						ng-required="true">
 						<option value="">-- Selecione a Data e Horário --</option>
 					</select>
@@ -112,6 +127,7 @@
 		<button class="btn btn-primary" ng-click="agendarDoacao(agenda)" ng-disabled="doacaoForm.$invalid">
         	Agendar
     	</button>
+    	 	
 	</form>
 </div>
 

@@ -8,7 +8,7 @@ server:
   contextPath: /hemoblas
   port: 8080
   ssl:
-    key-store: /home/bruno/Desktop/TCC/Projects/keystore.p12
+    key-store: /home/hemoblas/keystore.p12 
     key-store-password: hemobl@s
     key-store-type: PKCS12
     key-alias: tomcat

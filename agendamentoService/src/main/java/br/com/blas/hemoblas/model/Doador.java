@@ -44,9 +44,8 @@ public class Doador implements Serializable {
 	private Genero genero;
 
 	@NotBlank(message = "doador.rg.obrigatorio")
-	@Size(min = 10, max = 12, message = "{doador.rg.tamanho}")
+	@Size(min = 6, max = 14, message = "{doador.rg.tamanho}")
 	@Column(unique = true)
-	// TODO: CRIAR CONSTRAINT PARA VALIDAR UNICIDADE
 	private String rg;
 
 	@Pattern(regexp = "\\(\\d{2}\\)\\s\\d{4,5}-\\d{4}", message = "{doador.telefone.formato}")
@@ -80,8 +79,8 @@ public class Doador implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public Doador(String cpf, String nome, Date dataNascimento, Genero genero, String rg, String telefone, String email, String endereco,
-			String complemento, String cep) {
+	public Doador(String cpf, String nome, Date dataNascimento, Genero genero, String rg, String telefone, String email, String endereco, String complemento,
+			String cep) {
 		super();
 		this.cpf = cpf;
 		this.nome = nome;

@@ -14,12 +14,12 @@ import br.com.blas.hemoblas.model.Agenda;
 public interface AgendaRepository extends JpaRepository<Agenda, Long> {
 
 	@Query("SELECT a FROM Agenda a WHERE a.estabelecimentoSaudeId = :estabelecimentoSaudeId AND a.status.id = :statusId")
-	public List<Agenda> findByEstabelecimentoSaudeAndStatus(
-			@Param("estabelecimentoSaudeId") Long estabelecimentoSaudeId, @Param("statusId") Integer statusId);
+	public List<Agenda> findByEstabelecimentoSaudeAndStatus(@Param("estabelecimentoSaudeId") Long estabelecimentoSaudeId, @Param("statusId") Integer statusId);
 
 	@Query("SELECT a FROM Agenda a WHERE a.estabelecimentoSaudeId = :estabelecimentoSaudeId AND a.status.id = :statusId AND a.dataHora > :dataHora")
-	public List<Agenda> findByEstabelecimentoSaudeAndStatusAndDataHoraMaiorQue(
-			@Param("estabelecimentoSaudeId") Long estabelecimentoSaudeId, @Param("statusId") Integer statusId,
-			@Param("dataHora") Date dataHora);
+	public List<Agenda> findByEstabelecimentoSaudeAndStatusAndDataHoraMaiorQue(@Param("estabelecimentoSaudeId") Long estabelecimentoSaudeId,
+			@Param("statusId") Integer statusId, @Param("dataHora") Date dataHora);
+
+	public Agenda findByNumeroProtocolo(String numeroProtocolo);
 
 }

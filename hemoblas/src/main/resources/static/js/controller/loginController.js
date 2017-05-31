@@ -2,15 +2,17 @@ angular.module("hemoblas").controller("loginController", function($scope, $rootS
 
 	// LOGIN
 	$scope.login = function(dadosLogin) {
-
-		autenticacaoService.autenticarUsuario(dadosLogin).success(function(data) {
-			// $rootScope.cpfDoador = dadosLogin.cpf;
+		$scope.autenticando = true;
+		
+		autenticacaoService.autenticarUsuario(dadosLogin).success(function(data) {		
 			$window.sessionStorage.cpfDoador = dadosLogin.cpf;
 
 			autenticacaoService.setToken(data.token);
 
 			$location.path("/agendaDoacao");
 		}).error(function(data, status) {
+			$scope.autenticando = false;
+			
 			$scope.autenticacaoInvalida = true;
 		});
 

@@ -143,7 +143,9 @@ angular.module("hemoblas").controller(
 					// AGENDA A DOAÇÃO
 					agendaDoacaoService.agendarDoacao(agenda).success(function(data) {
 						$scope.numeroProtocolo = agenda.numeroProtocolo;
-
+						
+						$scope.obterComprovanteAgendamento();
+																		
 						delete $scope.agenda;
 
 						// Seta o formulário para o estado "virgem, não tocado",
@@ -158,5 +160,43 @@ angular.module("hemoblas").controller(
 				});
 
 			};
+			
+			$scope.obterComprovanteAgendamento = function() {
+								
+				agendaDoacaoService.obterComprovanteAgendamento($scope.numeroProtocolo).success(function(data) {
+					var ieEDGE = navigator.userAgent.match(/Edge/g);
+		            var ie = navigator.userAgent.match(/.NET/g); // IE 11+
+		            var oldIE = navigator.userAgent.match(/MSIE/g); 
+		            var name = "comprovanteAgendamento";
+		            var blob = new window.Blob([data], { type: 'application/pdf' });
 
+		            if (ie || oldIE || ieEDGE) {
+		                var fileName = name + ".pdf";
+		                window.navigator.msSaveBlob(blob, fileName);
+		            } else {
+		                var file = new Blob([ data ], {
+		                    type : 'application/pdf'
+		                });
+		                var fileURL = URL.createObjectURL(file);
+		                var a         = document.createElement('a');
+		                a.href        = fileURL; 
+		                a.target      = '_blank';
+		                a.download    = name + ".pdf";
+		                document.body.appendChild(a);
+		                a.click();
+		            }	            
+		            
+				}).error(function(data, status) {
+					$scope.errors = data.errors;
+				});	
+				
+			}
+			
+			// LOGOUT
+			$scope.logout = function() {
+				$window.sessionStorage.cpfDoador = null;
+				
+				$location.path("#/");
+			};
+			
 		});

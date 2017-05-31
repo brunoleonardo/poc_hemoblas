@@ -22,4 +22,10 @@ angular.module("hemoblas").service(
 
 			};
 
+			this.obterComprovanteAgendamento = function(numeroProtocolo) {
+				
+				return $http.get(config.baseUrlAgendamentoSecure + "/agendas/comprovanteAgendamento/numeroProtocolo=" + numeroProtocolo,  {responseType: 'arraybuffer'});				
+				
+			}
+			
 		});

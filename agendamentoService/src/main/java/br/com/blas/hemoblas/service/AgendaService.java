@@ -10,4 +10,6 @@ public interface AgendaService {
 
 	public void agendarDoacao(Agenda agenda);
 
+	public Agenda buscarPorNumeroProtocolo(String numeroProtocolo);
+
 }

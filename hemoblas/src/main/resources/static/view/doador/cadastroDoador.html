@@ -1,3 +1,11 @@
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#/">Hemoblas</a>
+		</div>  		
+	</div>
+</nav>
+
 <div class="container">
 	<div class="page-header">
 		<h3>{{app}}</h3>
@@ -54,7 +62,7 @@
             Por favor, preencha o campo RG.
         </div>
         <div ng-message="minlength || maxlength" class="alert alert-danger">
-            O campo RG deve ter no mínimo 7 e no máximo 15 caracteres.
+            O campo RG deve ter no mínimo 6 e no máximo 14 caracteres.
         </div>
     </div>
     
@@ -163,7 +171,7 @@
 					<label class="control-label">RG: *</label> 
 					<input class="form-control" type="text" 
 						id="rg" name="rg" placeholder="RG" 
-						ng-model="doador.rg"	ng-required="true" ng-minlength="10" ng-maxlength="12" />
+						ng-model="doador.rg" ng-required="true" ng-minlength="6" ng-maxlength="14" />
 				</div>				
 			</div>	
 			
@@ -218,7 +226,7 @@
 		<div class="row">
 			<div class="col-sm-2">
 				<div class="form-group" ng-class="{'has-error': doadorForm.senha.$invalid && doadorForm.senha.$touched}">
-					<label class="control-label">Criar um Senha</label> 
+					<label class="control-label">Senha</label> 
 					<input class="form-control" type="password" 
 						id="senha" name="senha" placeholder="Senha" 
 						ng-model="doador.senha" ng-required="true" ng-minlength="6" ng-maxlength="12" />
@@ -227,7 +235,7 @@
 			
 			<div class="col-sm-2">
 				<div class="form-group" ng-class="{'has-error': doadorForm.confirmaSenha.$invalid && doadorForm.confirmaSenha.$touched}">
-					<label class="control-label">Confirme sua Senha</label> 
+					<label class="control-label">Confirme a Senha</label> 
 					<input class="form-control" type="password" 
 						id="confirmaSenha" name="confirmaSenha" placeholder="Confirme sua Senha" 
 						ng-model="doador.confirmaSenha" ng-required="true" ng-minlength="6" ng-maxlength="12" />
@@ -237,9 +245,13 @@
 		
 		<hr>
 		
-		<button class="btn btn-primary" ng-click="cadastrarDoador(doador)" ng-disabled="doadorForm.$invalid">
-        	Salvar
-    	</button>
+		<div class="form-actions">  
+			<button class="btn btn-primary" ng-click="cadastrarDoador(doador)" ng-disabled="doadorForm.$invalid || processando">
+	        	Salvar
+	    	</button>
+	    	
+	    	<img ng-if="processando" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+	    </div>
 	</form>
 </div>
 
@@ -252,10 +264,10 @@
 		
 		$('#cpf').mask('999.999.999-99');
 		
-		$("#rg").mask("99.999.999?9").on("focusout", function () {
+		/*$("#rg").mask("99.999.999?9").on("focusout", function () {
             var len = this.value.replace(/\D/g, '').length;
             $(this).mask(len > 9 ? "99.999.999" : "99.999.999?9");
-        });
+        });*/
 				       
         $("#telefone").mask("(99) 9999-9999?9").on("focusout", function () {
             var len = this.value.replace(/\D/g, '').length;
